@@ -11,7 +11,7 @@ from .deps import get_db
 app = FastAPI()
 
 # TEMP: create tables (remove after Alembic)
-Base.metadata.create_all(bind=engine)
+# Base.metadata.create_all(bind=engine)
 
 
 @app.get("/users")
