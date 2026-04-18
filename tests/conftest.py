@@ -3,6 +3,7 @@ import os
 import subprocess
 from testcontainers.postgres import PostgresContainer
 from fastapi.testclient import TestClient
+from sqlalchemy import create_engine, text
 
 @pytest.fixture(scope="session")
 def postgres_container():
@@ -26,3 +27,13 @@ def client(postgres_container):
     from app.main import app
 
     return TestClient(app)
+@pytest.fixture(scope="function", autouse=True)
+def clean_db(postgres_container):
+    db_url = os.environ["DATABASE_URL"]
+    engine = create_engine(db_url)
+
+    with engine.connect() as conn:
+        # Disable FK checks temporarily
+        conn.execute(text("TRUNCATE TABLE users RESTART IDENTITY CASCADE"))
+
+    yield

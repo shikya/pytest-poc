@@ -8,5 +8,5 @@ Doing POC for pytest and gherkin tests
 `export DOCKER_HOST=unix:///var/run/docker.sock`
 `unix:///Users/shrikantsonone/.docker/run/docker.sock`
 
-
-
+`pytest --cov=app --cov-report=term-missing`
+`pytest --cov=app --cov-report=html`
