@@ -10,6 +10,7 @@ load_dotenv()
 from .db import engine, Base
 from .models import User
 from .deps import get_db
+from .services.external_api import fetch_users
 
 app = FastAPI()
 
@@ -37,3 +38,8 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Email already exists")
 
     return db_user
+
+
+@app.get("/external-users")
+def get_external_users():
+    return fetch_users()
