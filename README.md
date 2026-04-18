@@ -5,5 +5,8 @@ Doing POC for pytest and gherkin tests
 
 `fastapi dev app/main.py`
 
+`export DOCKER_HOST=unix:///var/run/docker.sock`
+`unix:///Users/shrikantsonone/.docker/run/docker.sock`
+
 
 
